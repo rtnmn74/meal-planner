@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div>
+
+      <label>Meal name:
+        <input #mealName/>
+      </label>
+      <!-- Button to add a meal to the list of meals -->
+      <button type="add" class="button" (click)="add(mealName.value); mealName.value=''">
+        Add Meal
+      </button>
+      <!-- list of available meals-->
+      <ul class="list-group">
+        <div *ngFor="let meal of meals">
+          <button type="edit" class="nav-item nav-link-edit" routerLink="/detail/{{meal.id}}"> Edit</button>
+          <button type="delete" class="delete" title="Delete Meal" (click)="delete(meal)"> Delete</button>
+          <span class="align-content-center">  {{meal.name}}
+              </span>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+

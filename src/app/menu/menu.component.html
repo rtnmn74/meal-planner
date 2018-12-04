@@ -1,0 +1,104 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Screen size detection -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Button that calls the captureScreen method to capture and create a pdf -->
+      <div> <button  id="generate" type="generate" class="generate" (click)="captureScreen()"> Generate Meal Menu </button>
+        <div id="print-section"> <!-- Start of element used in captureScreed method -->
+          <h5 class="text-center">Weekly Meal Menu</h5>
+          <table class="table"> <!-- Weekly Meal Menu Table -->
+            <thead>
+            <tr>
+              <th>Meal</th>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tues</th>
+              <th>Wed</th>
+              <th>Thur</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+            </thead>
+            <tbody> <!-- Days of the week and meal periods defined -->
+            <!-- Using ngx-select-dropdown to present a drop down of the available meals -->
+            <tr>
+              <td data-label="Meal">Breakfast</td>
+              <td data-label="Sunday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Monday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Tuesday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Wednesday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Thursday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Friday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Saturday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Meal">Lunch</td>
+              <td data-label="Sunday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Monday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Tuesday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Wednesday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Thursday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Friday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Saturday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Meal">Dinner</td>
+              <td data-label="Sunday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Monday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Tuesday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Wednesday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Thursday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Friday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+              <td data-label="Saturday">
+                <ngx-select-dropdown [multiple]="false" [options]="meals" [config]="config"></ngx-select-dropdown>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>
