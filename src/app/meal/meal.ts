@@ -1,4 +1,5 @@
-export class Meal {
-  id: number;
-  name: string;
+export interface Meal {
+  id?: string;
+  name?: string;
+ // payload?: any;
 }

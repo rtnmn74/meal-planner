@@ -3,23 +3,40 @@
     <div class="col-sm-1"></div>
     <div>
 
-      <label>Meal name:
-        <input #mealName/>
-      </label>
-      <!-- Button to add a meal to the list of meals -->
-      <button type="add" class="button" (click)="add(mealName.value); mealName.value=''">
-        Add Meal
-      </button>
+<!-- Form to add a meal to the list of meals -->
+<form (ngSubmit)="addMeal()">
+  <label>Meal name:
+  </label>
+  <input type="text" name="name" [(ngModel)]="meal.name">
+  <button type="submit">
+    Add meal
+  </button>
+</form>
+
       <!-- list of available meals-->
       <ul class="list-group">
-        <div *ngFor="let meal of meals">
-          <button type="edit" class="nav-item nav-link-edit" routerLink="/detail/{{meal.id}}"> Edit</button>
-          <button type="delete" class="delete" title="Delete Meal" (click)="delete(meal)"> Delete</button>
-          <span class="align-content-center">  {{meal.name}}
-              </span>
+        <div>
+          <ul *ngFor="let meal of meals">
+            <li>
+              <button (click)="editMeal($event, meal)">
+                Edit
+              </button>
+              <button (click)="deleteMeal($event, meal)">
+                Delete
+              </button>
+              {{ meal.name }}
+              <div *ngIf="editing && editingMeal.id == meal.id">
+                <form (ngSubmit)="updateMeal(meal)">
+                  <input type="text" name="name" [(ngModel)]="editingMeal.name">
+                  <button type="submit">
+                    Update
+                  </button>
+                </form>
+              </div>
+            </li>
+          </ul>
         </div>
       </ul>
-    </div>
-  </div>
-</div>
 
+</div>
+</div>

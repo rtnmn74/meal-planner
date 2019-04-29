@@ -1,47 +1,50 @@
-import {Component, OnInit} from '@angular/core';
-import {Meal} from './meal';
-import {MealService} from './meal.service';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Meal } from './meal';
+import { AFSService } from './afs.service';
 
 @Component({
   selector: 'app-meal',
   templateUrl: './meal.component.html',
   styleUrls: ['./meal.component.css']
 })
-export class MealComponent implements OnInit {
+export class MealComponent implements OnInit, OnDestroy {
 
-  // Define meals variable with array
-  meals: Meal[];
+  meals = [];
+  meal = {} as Meal;
+  editing = false;
+  editingMeal: Meal;
+  private subscription;
 
-  constructor(private mealService: MealService) {
-  }
+  constructor(public afsService: AFSService) { }
 
   ngOnInit() {
-    this.getMeals();
+    this.subscription = this.afsService.getMeals().subscribe(meals => {
+      this.meals = meals;
+    });
   }
 
-  // Method to get meals using meal service
-  getMeals(): void {
-    this.mealService.getMeals()
-      .subscribe(meals => this.meals = meals);
-  }
-
-  // Method to add a meal using meal service
-  add(name: string): void {
-    name = name.trim();
-    if (!name) {
-      return;
+  addMeal() {
+    if (this.meal.name !== '') {
+      this.afsService.addMeal(this.meal);
+      this.meal = {} as Meal;
     }
-    this.mealService.addMeal({name} as Meal)
-      .subscribe(meal => {
-        this.meals.push(meal);
-      });
   }
 
-  // Method to delete a meal using meal service
-  delete(meal: Meal): void {
-    this.meals = this.meals.filter(h => h !== meal);
-    this.mealService.deleteMeal(meal).subscribe();
+  deleteMeal(event, meal) {
+    this.afsService.deleteMeal(meal);
   }
 
+  editMeal(event, meal) {
+    this.editing = !this.editing;
+    this.editingMeal = meal;
+  }
+
+  updateMeal() {
+    this.afsService.updateMeal(this.editingMeal);
+    this.editingMeal = {} as Meal;
+    this.editing = false;
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

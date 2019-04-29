@@ -12,6 +12,12 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './in-memory-data.service';
 import {HttpClientModule} from '@angular/common/http';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FirestoreSettingsToken} from '@angular/fire/firestore';
+
+
 
 @NgModule({
   declarations: [
@@ -27,6 +33,8 @@ import {SelectDropDownModule} from 'ngx-select-dropdown';
     AppRoutingModule,
     FormsModule,
     SelectDropDownModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     HttpClientModule,
     // Mock API using In Memory API Module
     HttpClientInMemoryWebApiModule.forRoot(
@@ -41,7 +49,7 @@ import {SelectDropDownModule} from 'ngx-select-dropdown';
     HeaderComponent,
     MessagesComponent
   ],
-  providers: [],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

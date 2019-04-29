@@ -20,7 +20,7 @@ export class MealDetailComponent implements OnInit {
   // Constructor for meal detail component
   constructor(
     private route: ActivatedRoute,
-    private mealService: MealService,
+    private mealDBService: MealService,
     private location: Location
   ) {
   }
@@ -35,7 +35,7 @@ export class MealDetailComponent implements OnInit {
     // Define variable for id from the route snapshot
     const id = +this.route.snapshot.paramMap.get('id');
     // Subscribe to meal service get meal method
-    this.mealService.getMeal(id)
+    this.mealDBService.getMeal(id)
       .subscribe(meal => this.meal = meal);
   }
 
@@ -48,7 +48,7 @@ export class MealDetailComponent implements OnInit {
   // Method to save the change to the meal
   save(): void {
     // Subscribe to meal service update meal method
-    this.mealService.updateMeal(this.meal)
+    this.mealDBService.updateMeal(this.meal)
       .subscribe(() => this.goBack());
   }
 }

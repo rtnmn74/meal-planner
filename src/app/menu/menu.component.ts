@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {MealService} from '../meal/meal.service';
 import {Meal} from '../meal/meal';
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
+import { AFSService } from '../meal/afs.service';
+
 
 @Component({
   selector: 'app-menu',
@@ -11,10 +13,11 @@ import * as jspdf from 'jspdf';
 })
 
 // Class for meal component
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
   // Variable for Meal array
-  meals: Meal[] = [];
+  meals;
+  private subscription;
 
   // Configuration for ngx select dropdown menus used in html template
   // Config defines the name in the meals array and the default key
@@ -25,7 +28,7 @@ export class MenuComponent implements OnInit {
   };
 
   // Constructor for meal component
-  constructor(private mealService: MealService) {
+  constructor(private afsService: AFSService) {
   }
   // Call getMeals on component initialization
   ngOnInit() {
@@ -34,7 +37,7 @@ export class MenuComponent implements OnInit {
 
   // Method to get meals from array
   getMeals(): void {
-    this.mealService.getMeals()
+    this.subscription = this.afsService.getMeals()
       .subscribe(meals => this.meals = meals);
   }
 
@@ -62,5 +65,7 @@ export class MenuComponent implements OnInit {
       pdf.save('WeeklyMealPlan.pdf');
     });
   }
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
